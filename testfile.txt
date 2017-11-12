@@ -1,1 +1,20 @@
 data/
+
+
+1. Find persons who served as both actor and director in the same movie (display person name and movie title). 
+
+MATCH (p:Person)-[:ACTED_IN]-(m:Movie)-[:DIRECTED]-(p:Person) 
+RETURN p.name, m.title
+
+
+2. Find the name of directors who have never acted.?
+
+MATCH (p:Person)-[:DIRECTED]-(:Movie)
+WHERE not (p:Person)-[:ACTED_IN]-(:Movie)
+RETURN DISTINCT p.name
+
+3. For each person who has acted in at least one movie, add a label ñActorî to the node representing this person. 
+MATCH ((p:Person)-[e:ACTED_IN]-(:Movie))
+SET p:Actor
+
+4. Something new here!
